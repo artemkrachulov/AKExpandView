@@ -1,13 +1,16 @@
 {
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "86FDF9EB66DBE6CF4B01E49B67B59B54D6EE1B53",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
 
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "86FDF9EB66DBE6CF4B01E49B67B59B54D6EE1B53" : 0,
     "9517F49643BCAEBFF187DC7C816A074D3F831F5B" : 0,
     "6F9D29D2B4BB4096757D3B44CD8B6E138DBE506E" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3A8FD0F2-1D3D-47BB-8112-B40FDE5FC162",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "86FDF9EB66DBE6CF4B01E49B67B59B54D6EE1B53" : "AKExpandView\/",
     "9517F49643BCAEBFF187DC7C816A074D3F831F5B" : "AKExpandView\/submodules\/UIView-loadFromXibNib\/",
     "6F9D29D2B4BB4096757D3B44CD8B6E138DBE506E" : "AKExpandView\/submodules\/UIActivityWebView\/"
   },
@@ -19,6 +22,11 @@
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/artemkrachulov\/UIActivityWebView.git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "6F9D29D2B4BB4096757D3B44CD8B6E138DBE506E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/artemkrachulov\/AKExpandView.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "86FDF9EB66DBE6CF4B01E49B67B59B54D6EE1B53"
     },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/artemkrachulov\/UIView-loadFromXibNib.git",
