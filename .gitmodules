@@ -1,0 +1,6 @@
+[submodule "submodules/UIView-loadFromXibNib"]
+	path = submodules/UIView-loadFromXibNib
+	url = https://github.com/artemkrachulov/UIView-loadFromXibNib.git
+[submodule "submodules/UIActivityWebView"]
+	path = submodules/UIActivityWebView
+	url = https://github.com/artemkrachulov/UIActivityWebView.git
