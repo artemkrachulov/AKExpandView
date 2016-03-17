@@ -18,10 +18,9 @@
 		4384B2481C7F1DD900185A20 /* DemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4384B2471C7F1DD900185A20 /* DemoUITests.swift */; };
 		4384B2571C7F1EC000185A20 /* AKExpandView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4384B2561C7F1EC000185A20 /* AKExpandView.xib */; };
 		4384B2591C7F21AE00185A20 /* AKExpandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4384B2581C7F21AE00185A20 /* AKExpandView.swift */; };
-		43941EF51C90158D00A5508D /* UIView+loadFromXibNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43941EF41C90158D00A5508D /* UIView+loadFromXibNib.swift */; };
-		43941EF91C90159700A5508D /* UIActivityWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43941EF71C90159700A5508D /* UIActivityWebView.swift */; };
-		43941EFA1C90159700A5508D /* UIActivityWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43941EF81C90159700A5508D /* UIActivityWebView.xib */; };
 		4399BCEB1C809ACE00A200CD /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4399BCEA1C809ACE00A200CD /* DemoViewController.swift */; };
+		43E79C281C9AAC9F00C00B77 /* UIActivityWebView in Resources */ = {isa = PBXBuildFile; fileRef = 43E79C271C9AAC9F00C00B77 /* UIActivityWebView */; };
+		43E79C2A1C9AACB300C00B77 /* UIView+loadFromXibNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E79C291C9AACB300C00B77 /* UIView+loadFromXibNib.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,10 +58,9 @@
 		4384B2491C7F1DD900185A20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4384B2561C7F1EC000185A20 /* AKExpandView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKExpandView.xib; sourceTree = "<group>"; };
 		4384B2581C7F21AE00185A20 /* AKExpandView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AKExpandView.swift; sourceTree = "<group>"; };
-		43941EF41C90158D00A5508D /* UIView+loadFromXibNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+loadFromXibNib.swift"; path = "../Submodules/UIView-loadFromXibNib/src/UIView+loadFromXibNib.swift"; sourceTree = "<group>"; };
-		43941EF71C90159700A5508D /* UIActivityWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIActivityWebView.swift; sourceTree = "<group>"; };
-		43941EF81C90159700A5508D /* UIActivityWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UIActivityWebView.xib; sourceTree = "<group>"; };
 		4399BCEA1C809ACE00A200CD /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
+		43E79C271C9AAC9F00C00B77 /* UIActivityWebView */ = {isa = PBXFileReference; lastKnownFileType = folder; name = UIActivityWebView; path = ../Vendor/UIActivityWebView/UIActivityWebView; sourceTree = "<group>"; };
+		43E79C291C9AACB300C00B77 /* UIView+loadFromXibNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+loadFromXibNib.swift"; path = "../Vendor/UIView-loadFromXibNib/Source/UIView+loadFromXibNib.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,7 +91,7 @@
 		4384B21B1C7F1DD900185A20 = {
 			isa = PBXGroup;
 			children = (
-				43941EF31C90158000A5508D /* Submodules */,
+				43941EF31C90158000A5508D /* Vendor */,
 				4384B2261C7F1DD900185A20 /* Demo */,
 				4384B23B1C7F1DD900185A20 /* DemoTests */,
 				4384B2461C7F1DD900185A20 /* DemoUITests */,
@@ -156,23 +154,13 @@
 			path = ../AKExpandView;
 			sourceTree = "<group>";
 		};
-		43941EF31C90158000A5508D /* Submodules */ = {
+		43941EF31C90158000A5508D /* Vendor */ = {
 			isa = PBXGroup;
 			children = (
-				43941EF41C90158D00A5508D /* UIView+loadFromXibNib.swift */,
-				43941EF61C90159700A5508D /* UIActivityWebView */,
+				43E79C291C9AACB300C00B77 /* UIView+loadFromXibNib.swift */,
+				43E79C271C9AAC9F00C00B77 /* UIActivityWebView */,
 			);
-			name = Submodules;
-			sourceTree = "<group>";
-		};
-		43941EF61C90159700A5508D /* UIActivityWebView */ = {
-			isa = PBXGroup;
-			children = (
-				43941EF71C90159700A5508D /* UIActivityWebView.swift */,
-				43941EF81C90159700A5508D /* UIActivityWebView.xib */,
-			);
-			name = UIActivityWebView;
-			path = ../Submodules/UIActivityWebView/UIActivityWebView;
+			name = Vendor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,8 +268,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				4384B2321C7F1DD900185A20 /* LaunchScreen.storyboard in Resources */,
-				43941EFA1C90159700A5508D /* UIActivityWebView.xib in Resources */,
 				4384B2571C7F1EC000185A20 /* AKExpandView.xib in Resources */,
+				43E79C281C9AAC9F00C00B77 /* UIActivityWebView in Resources */,
 				4384B22F1C7F1DD900185A20 /* Assets.xcassets in Resources */,
 				4384B22D1C7F1DD900185A20 /* Main.storyboard in Resources */,
 			);
@@ -308,13 +296,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43941EF51C90158D00A5508D /* UIView+loadFromXibNib.swift in Sources */,
+				43E79C2A1C9AACB300C00B77 /* UIView+loadFromXibNib.swift in Sources */,
 				4384B2591C7F21AE00185A20 /* AKExpandView.swift in Sources */,
 				4384B22A1C7F1DD900185A20 /* ViewController.swift in Sources */,
 				4384B2281C7F1DD900185A20 /* AppDelegate.swift in Sources */,
 				43839F161C80441E003027ED /* AKExpandGradientView.swift in Sources */,
 				4399BCEB1C809ACE00A200CD /* DemoViewController.swift in Sources */,
-				43941EF91C90159700A5508D /* UIActivityWebView.swift in Sources */,
 				43678F8C1C86D6DE00F6D0A6 /* TypesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

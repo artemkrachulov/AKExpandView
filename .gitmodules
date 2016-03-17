@@ -1,0 +1,6 @@
+[submodule "Vendor/UIView-loadFromXibNib"]
+	path = Vendor/UIView-loadFromXibNib
+	url = https://github.com/artemkrachulov/UIView-loadFromXibNib.git
+[submodule "Vendor/UIActivityWebView"]
+	path = Vendor/UIActivityWebView
+	url = https://github.com/artemkrachulov/UIActivityWebView.git
