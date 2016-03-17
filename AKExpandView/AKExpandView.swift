@@ -8,263 +8,79 @@
 
 import UIKit
 
+struct AKExpandViewAnimationOptions {
+	var duration: NSTimeInterval!
+	var option: UIViewAnimationOptions!
+}
+
+
 class AKExpandView: UIView {
-	
-	var anumation: Bool = false
-	
-	var maxHeight: CGFloat!
-	
-	var color: UIColor! = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+
+	// MARK: - Outlets
+	//         _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+	// 1
 	
 	
-	@IBOutlet weak var gradientView: AKExpandGradientView! {
+	var heightConstraint: NSLayoutConstraint!
+	
+	@IBOutlet weak var expandWrapperViewHeightConstraint: NSLayoutConstraint!
+	@IBOutlet weak var expandWrapperView: UIView!  {
 		didSet {
-			
-			gradientView.hidden = true
-			
-			gradientView.backgroundColor = UIColor.clearColor()
-			
-			let components = CGColorGetComponents(color.CGColor)
-			
-			gradientView.startColor = UIColor(red: components[0], green: components[1], blue: components[2], alpha: 0)
-			gradientView.endColor = UIColor(red: components[0], green: components[1], blue: components[2], alpha: 1)
-
-			gradientView.setNeedsDisplay()
+			expandWrapperView.clipsToBounds = true
 		}
 	}
 	
-	
-	@IBOutlet weak var topView: UIView!  {
-		didSet {
-			topView.clipsToBounds = true
-		}
-	}
-	
-	@IBOutlet weak var topViewHeightConstraint: NSLayoutConstraint!
-	@IBOutlet weak var topInnerView: UIView! {
-		didSet {
-			topInnerView.clipsToBounds = true
-		}
-	}
-	
-	
-	@IBOutlet weak var btn: UIButton!
-
-	@IBOutlet weak var bottomVIew: UIView!
-	
-	@IBOutlet weak var buttonView: UIView!
-	
-	@IBOutlet weak var buttonViewHeightConstraint: NSLayoutConstraint!
-	
-	
-	var  c: NSLayoutConstraint!
-	
-	
-	
-	
-
-	required init(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)!
-			print("  ")
-			print("  --------   ")
-			print("  ")
-		
-		
-		let vc = self.subviews.first
-		print(subviews)
-		print("VC \(vc)")
-		
-//		v = self.subviews.first
-		
-		
-		for s in self.subviews {
-			s.removeFromSuperview()
-		}
-		
-		loadFromNib(nil, bundle: nil)
-		
-		
-		
-		self.clipsToBounds = true
-		
-		c = constraints.first as NSLayoutConstraint!
-		
-		if maxHeight == nil {
-
-			maxHeight = self.frame.size.height
-//			print(maxHeight)
-		}
-		
-		/*
-		
-		if let height = constraints.first as NSLayoutConstraint!  {
-//			self.removeConstraint(height)
-		}
-		*/
-//		print(buttonView)
-		
-		
-		bottomVIew.addSubview(buttonView)
-	
-		buttonView.frame.origin = CGPointZero
-		
-		buttonView.translatesAutoresizingMaskIntoConstraints = false
-		
-		let viewsDictionary = ["view": buttonView]
-		
-		bottomVIew.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary))
-		bottomVIew.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary))
-		
-		
-		if vc != nil {
-			
-			print("VC")
-			viewToExpand(vc!)
-		}
-	}
-	
-	
-	
-	var v : UIView!
-	var cc: NSLayoutConstraint!
-	
-	func viewToExpand(view: UIView) {
-		
-//		view.removeConstraints(view.constraints)
-		
-		view.autoresizingMask = UIViewAutoresizing.None
-		view.translatesAutoresizingMaskIntoConstraints = false
-		
-		v = view
-		
-		
-
-		view.frame = CGRectZero
-
-		topInnerView.addSubview(view)
-		topView.bringSubviewToFront(gradientView)
-
-		let viewsDictionary = ["view": v]
-		
-		topInnerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary))
-		topInnerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary))
-		
-		if let height = topInnerView.constraints.first as NSLayoutConstraint!  {
-			topInnerView.removeConstraint(height)		}
-		
-		topInnerView.layoutSubviews()
-		
-		
-		
-		
-		var isHeight: Bool = false
-		for _c in v.constraints {
-			
-			print(_c)
-			
-			
-			if _c.secondItem == nil && _c.firstAttribute == NSLayoutAttribute.Height {
-				
-				isHeight = true
-/*
-				
-				cc = NSLayoutConstraint(item: v, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute(rawValue: 0)!, multiplier: 1, constant: v.frame.size.height)
-				
-				
-				v.addConstraint(cc)*/
-				
-				break
-				
-
+		@IBOutlet weak var expandContainerView: UIView! {
+			didSet {
+				expandContainerView.clipsToBounds = true
 			}
-			
-		
-			//				}
-			
-			
-			
-			
 		}
-		
-		if !isHeight {
-			
-			
-			
-			print("s")
-			
-			
-			cc = NSLayoutConstraint(item: v, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute(rawValue: 0)!, multiplier: 1, constant: v.frame.size.height)
-			
-			
-			v.addConstraint(cc)
+	
+			var expandViewHeightContraint: NSLayoutConstraint!
+			var expandView: UIView!
+	
+		@IBOutlet weak var gradientView: AKExpandGradientView! {
+			didSet {
+				
+				gradientView.hidden = true
+				gradientView.backgroundColor = UIColor.clearColor()
+				
+				let components = CGColorGetComponents(gradientViewColor.CGColor)
+				
+				gradientView.startColor = UIColor(red: components[0], green: components[1], blue: components[2], alpha: 0)
+				gradientView.endColor = UIColor(red: components[0], green: components[1], blue: components[2], alpha: 1)
+				
+				gradientView.setNeedsDisplay()
+			}
 		}
-		
-		
-		
-//		print(view.frame)
-		
-		/*
-		cc = NSLayoutConstraint(item: v, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute(rawValue: 0)!, multiplier: 1, constant: view.frame.size.height)
-		
-		v.addConstraint(cc)
-
-		*/
-		
-
-		
-		
-		
-//		topInnerView.layoutSubviews()
-		
-
-//		cc = refreshHeightConstraint()
-		
-		
-		
-		
-//		print(v.autoresizingMask)
-
-
-
-		
-//		print(topInnerView)
-		
-//		topInnerView.layoutIfNeeded()
-		
-//		print(v)
-//		print(v.constraints)
-		
-		
-//		print(v)
-//		print(topInnerView)
-		
-		/*
-		
-		cc = NSLayoutConstraint(item: v, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute(rawValue: 0)!, multiplier: 1, constant: 100)
-		
-		v.addConstraint(cc)
-
-*/
-		
-		
+	
+	@IBOutlet weak var actionContainerHeightConstraint: NSLayoutConstraint!
+	@IBOutlet weak var actionContainerView: UIView!
+	
+	// 2
+	
+	@IBOutlet weak var actionView: UIView!
+	
+	@IBOutlet weak var btn: UIButton!  {
+		didSet {
+			btn.setTitle(btnClosedTitle, forState: UIControlState.Normal)
+		}
 	}
 	
-	override func layoutSubviews() {
-//		super.layoutSubviews()
-		print("aaaa")
-		
-//		
-//		print("ss")
-		
-		
-//		layoutIfNeeded()
-		layoutSubviews(true)
-		
-//		layoutIfNeeded()
-		
-		
-	}
+	// Settings
+	
+	var minCollapsedHeight: CGFloat!
+	
+	var animation = false
+	var animationOptions: AKExpandViewAnimationOptions?
 
+	var showGradientView = true
+	var gradientViewColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+	
+	
+	
+	
+	
 	// Flags
 	var flag_expanded = false
 	
@@ -273,246 +89,223 @@ class AKExpandView: UIView {
 	var btnClosedTitle = "read more..."
 	var btnOpenTitle = "read less..."
 	
-	
-	
-	
-	func refreshHeightConstraint(special: Bool = false ) -> NSLayoutConstraint! {
-		
-		print(special)
-		
-		var isHeight: Bool! = false
-		
-		if v != nil {
-			if !v.constraints.isEmpty {
-				
-			for _c in v.constraints {
-				
-				print(_c)
-				
-				
-				
-				/*
-				
-				if special {
-					print("AAA")
-					
-					isHeight = true
-					
-					break
-				
-				} else {*/
-				
-					
-					if _c.secondItem == nil && _c.firstAttribute == NSLayoutAttribute.Height {
-						
-						isHeight = true
-						
-//						print(_c)
-						
-						
-						return _c.constant != 0 ? _c : nil
 
-//						break
-					}
-//				}
-				
-				
-				
-				
-			}
-			}
-			
-			
-			if !isHeight {
-				
-				print(v.constraints )
-				
-				for _c in v.constraints {
-					
-					print(_c)
-					
-					
-					if _c.secondItem != nil && _c.secondAttribute == NSLayoutAttribute.Height  && _c.firstAttribute == NSLayoutAttribute.Height {
-						
-//						isHeight = true
-						
-						let cc = NSLayoutConstraint(item: v, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute(rawValue: 0)!, multiplier: 1, constant: v.frame.size.height)
-						
-						
-						v.addConstraint(cc)
-						
-						print(_c)
-						
-						return cc
-					}
-					//				}
-					
-					
-					
-					
-				}
-				
-		/*
-				
-				return refreshHeightConstraint(true)
-				*/
-				
-			}
+	
+	
+	// MARK: - Initialization
+	//         _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+	
+	
+	
+
+	required init(coder aDecoder: NSCoder) {
+		super.init(coder: aDecoder)!
+
+		clipsToBounds = true
+		
+		minCollapsedHeight = CGRectGetHeight(self.frame)
+		
+		// ???
+		
+		heightConstraint = heightContraint(self)
+		
+		// Get inner view from storyboard
+		// initialization
+		
+		let vc = self.subviews.first
+		
+		// Clear all inner view
+		// to aviod conflicts
+		
+		removeSubviews(self)
+		
+		loadFromNib(nil, bundle: nil)
+		
+		// Process views
+		// 1. Expand view from storyboard
+		
+		if vc != nil {
+			viewToExpand(vc!)
 		}
 		
-		return nil
+		// 2. View with button from AKExpandView.xib
 		
-//		cc = nil
+		actionView(actionView)
+	}
+	
+	
+	func actionView(view: UIView) {
 		
+		view.frame.origin = CGPointZero
+		view.translatesAutoresizingMaskIntoConstraints = false
 		
+		actionContainerView.addSubview(view)
 		
-
+		let viewsDictionary = ["view": view]
+		
+		actionContainerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary))
+		actionContainerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary))
 	}
 	
 	
 	
+	
+	
+	
+	func removeSubviews(view: UIView) {
+		for subview in view.subviews {
+			subview.removeFromSuperview()
+		}
+	}
+	
+	
+
+	
+
+	
+	
+	func heightContraint(view: UIView) -> NSLayoutConstraint! {
+		
+		for constraint in view.constraints {
+			if constraint.firstAttribute == NSLayoutAttribute.Height && constraint.secondItem == nil {
+				return constraint
+			}
+		}
+		return nil
+	}
+	
+	
+	
+	func viewToExpand(view: UIView) {
+		
+		removeSubviews(expandContainerView)
+		
+		view.frame = CGRectZero
+		view.autoresizingMask = UIViewAutoresizing.None
+		view.translatesAutoresizingMaskIntoConstraints = false
+		expandViewHeightContraint = nil
+		
+		expandContainerView.addSubview(view)
+		expandWrapperView.bringSubviewToFront(gradientView)
+
+		let viewsDictionary = ["view": view]
+		
+		expandContainerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary))
+		expandContainerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-0-[view]-0-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary))
+		
+		if let heightContraint = heightContraint(expandContainerView) {
+			expandContainerView.removeConstraint(heightContraint)
+		}		
+		
+		// Get height constraint
+		expandContainerView.layoutSubviews()
+		
+		if heightContraint(view) == nil {
+			expandViewHeightContraint = NSLayoutConstraint(item: view, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute(rawValue: 0)!, multiplier: 1, constant: CGRectGetHeight(view.frame))
+			
+			view.addConstraint(expandViewHeightContraint)
+		}
+		
+		// Save reference
+	
+		print("AA")
+		expandView = view
+	}
+	
+	
+	func heightContraint2(view: UIView) -> NSLayoutConstraint! {
+		
+		for constraint in view.constraints {
+			if constraint.firstAttribute == NSLayoutAttribute.Height && constraint.secondItem == nil {
+				return constraint
+			}
+		}
+		return nil
+	}
+	
+	
+	
+	
+	override func layoutSubviews() {
+		
+		layoutSubviews(true)
+	}
+
 	func layoutSubviews(action: Bool) {
-
-
 		
-
-//		cc = refreshHeightConstraint()
-		
-		
-/*
-
-
-		
-		
-		#if AKDEBUG
-			print("Object ::::::: AKExpandView 1")
-			print("Method ::::::: layoutSubviews")
-			print("               - -")
-			print("Properties ::: self > > > \(self)")
-			print(":::::::::::::: topInnerView > > > \(topInnerView)")
-			print(":::::::::::::: v > > > \(v)")
-			print(":::::::::::::: v > > > \(v.constraints)")
-			print("")
-		#endif
-
-		*/
-		
-		
-		if v != nil {
-//			v.layoutIfNeeded()
+		if expandView != nil {
 			
-//			topInnerView.layoutIfNeeded()
-			v.sizeToFit()
-//			topInnerView.layoutSubviews()
-			
-			
-		
-			topInnerView.frame.size.height = v.frame.size.height
-			
-			
-//			v.constraints.first?.constant =  v.frame.size.height
-			
+			expandView.sizeToFit()
+			expandContainerView.frame.size.height = expandView.frame.size.height
 		}
 		
+		let height: CGFloat = CGRectGetHeight(expandContainerView.frame)
 		
-		
-		let height: CGFloat = CGRectGetHeight(topInnerView.frame)
-		
-//		
-//		v.constraints.first?.constant = height
-		
-		if cc != nil {
-			
-			cc.constant = height
-			
-			print("AAAASSSS")
-//				cc.constant = height
+		if expandViewHeightContraint != nil {
+			expandViewHeightContraint.constant = height
 		}
 
-		/*
-		
-		print(v.constraints.first?.constant)
-		
-		cc.constant = (v.constraints.first?.constant)!
-		
-		*/
 
 		if flag_expanded {
 			
-			if height <= 100 {
+			if height <= minCollapsedHeight {
 				
-				topViewHeightConstraint.constant = height
+				expandWrapperViewHeightConstraint.constant = height
 				
-				if c != nil {
-					c.constant = height
-				} else {
+				if heightConstraint != nil { heightConstraint.constant = height } else {
+					
 					if action {
-						self.frame.size.height = height
+						frame.size.height = height
 					}
 				}
-				
-				
 			} else {
 				
-				topViewHeightConstraint.constant = height
+				expandWrapperViewHeightConstraint.constant = height
 				
-				if c != nil {
-					c.constant = height + CGRectGetHeight(buttonView.frame)
-				} else {
-					if action {
+				gradientView.hidden = true
+				
+				if heightConstraint != nil { heightConstraint.constant = height + CGRectGetHeight(actionView.frame) } else {
 					
-					self.frame.size.height = height + CGRectGetHeight(buttonView.frame)
+					if action {
+						frame.size.height = height + CGRectGetHeight(actionView.frame)
 					}
 				}
-				
-				
 			}
 			
 		} else {
 			
+			expandWrapperViewHeightConstraint.constant = height > minCollapsedHeight ? minCollapsedHeight : height
 			
-				topViewHeightConstraint.constant = height > 100 ? 100 : height
-			
-				if c != nil {
-					c.constant = height > 100 ? 100 + CGRectGetHeight(buttonView.frame) : height
-				} else {
-					if action {
-						self.frame.size.height = height > 100 ? 100 + CGRectGetHeight(buttonView.frame) : height
-					}
+			gradientView.hidden = height <= minCollapsedHeight
+		
+			if heightConstraint != nil { heightConstraint.constant = height > minCollapsedHeight ? minCollapsedHeight + CGRectGetHeight(actionView.frame) : height } else {
+				
+				if action {
+					frame.size.height = height > minCollapsedHeight ? minCollapsedHeight + CGRectGetHeight(actionView.frame) : height
 				}
-			
-					buttonViewHeightConstraint.constant = CGRectGetHeight(buttonView.frame)
+			}
+		
+			actionContainerHeightConstraint.constant = CGRectGetHeight(actionView.frame)
 		}
 		
-
-		if v.respondsToSelector(Selector("contentOffset")) {
-			(v as! UIScrollView).contentOffset = CGPointZero
+		if expandView.respondsToSelector(Selector("contentOffset")) {
+			(expandView as! UIScrollView).contentOffset = CGPointZero
 		}
-		
-		
-		print("layoutSubviewssss")
-		
-		
-//		topInnerView.layoutIfNeeded()
-		/*
-				#if AKDEBUG
-					print("Object ::::::: AKExpandView 2")
-					print("Method ::::::: layoutSubviews")
-					print("               - -")
-					print("Properties ::: self > > > \(self)")
-					print(":::::::::::::: topInnerView > > > \(topInnerView)")
-					print(":::::::::::::: v > > > \(v)")
-					print(":::::::::::::: v > > > \(v.constraints.first?.constant)")
-					print("")
-				#endif*/
 
-
-//		v.constraints.first?.constant = height
-		
-//		v.layoutSubviews()
-//		v.layoutIfNeeded()
-//		v.sizeToFit()
-
+		#if AKExpandViewDEBUG
+			print("Object ::::::: AKExpandView")
+			print("Method ::::::: layoutSubviews")
+			print("               - -")
+			print("Properties ::: height = \(height)")
+			print("                  ")
+			print("               AKExpandView = \(self.frame)")
+			print("               ↳ expandWrapperView = \(expandWrapperView.frame)")
+			print("                 ↳ expandContainerView = \(expandContainerView.frame)")
+			print("                   - expandView = \(expandView)")
+			print("               ↳ actionContainerView = \(actionContainerView.frame)")
+			print("                 ↳ actionView = \(actionView)")
+			print("")
+		#endif
 	}
 	
 	
@@ -525,12 +318,12 @@ class AKExpandView: UIView {
 		if flag_expanded {
 			
 			flag_expanded = false
-//			btn.setTitle(btnOpenTitle, forState: UIControlState.Normal)
+			btn.setTitle(btnClosedTitle, forState: UIControlState.Normal)
 			
 		} else {
 			
 			flag_expanded = true
-//			btn.setTitle(btnClosedTitle, forState: UIControlState.Normal)
+			btn.setTitle(btnOpenTitle, forState: UIControlState.Normal)
 		}
 		
 

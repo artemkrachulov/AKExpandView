@@ -7,14 +7,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AKExpandView" customModule="Demo" customModuleProvider="target">
             <connections>
-                <outlet property="bottomVIew" destination="A7g-DS-aW6" id="I1p-S2-TqX"/>
+                <outlet property="actionContainerHeightConstraint" destination="7Bl-hG-hRY" id="3qQ-uF-y1v"/>
+                <outlet property="actionContainerView" destination="A7g-DS-aW6" id="bLZ-hF-MP1"/>
+                <outlet property="actionView" destination="bZp-C6-XyJ" id="ch2-5J-wbX"/>
                 <outlet property="btn" destination="BTe-Hf-75b" id="PRX-Mn-Xon"/>
-                <outlet property="buttonView" destination="bZp-C6-XyJ" id="SNf-d1-m4y"/>
-                <outlet property="buttonViewHeightConstraint" destination="7Bl-hG-hRY" id="ufv-Rm-DVZ"/>
+                <outlet property="expandContainerView" destination="ARb-q5-bx2" id="DTU-QQ-6eZ"/>
+                <outlet property="expandWrapperView" destination="8vg-Su-305" id="i1I-83-hxf"/>
+                <outlet property="expandWrapperViewHeightConstraint" destination="4qg-1c-1GY" id="wkf-zc-l8q"/>
                 <outlet property="gradientView" destination="t4d-aD-TTt" id="Rjl-oP-3MN"/>
-                <outlet property="topInnerView" destination="ARb-q5-bx2" id="Kgl-Nl-tmP"/>
-                <outlet property="topView" destination="8vg-Su-305" id="gZS-zB-Zaz"/>
-                <outlet property="topViewHeightConstraint" destination="4qg-1c-1GY" id="lSJ-R2-RB8"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -73,7 +73,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="70"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTe-Hf-75b">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTe-Hf-75b">
                     <rect key="frame" x="0.0" y="10" width="600" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="Vu6-EJ-T1e"/>
@@ -84,7 +84,6 @@
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="BTe-Hf-75b" firstAttribute="leading" secondItem="bZp-C6-XyJ" secondAttribute="leading" id="0E3-eI-4Pm"/>
                 <constraint firstAttribute="trailing" secondItem="BTe-Hf-75b" secondAttribute="trailing" id="KRe-KB-B6c"/>

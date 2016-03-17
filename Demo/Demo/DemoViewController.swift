@@ -67,10 +67,6 @@ class DemoViewController: UIViewController, UIActivityWebViewDelegate {
 	// MARK: - Properties
 	//         _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 	
-	
-	var  h: NSLayoutConstraint!
-
-	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
@@ -94,42 +90,23 @@ class DemoViewController: UIViewController, UIActivityWebViewDelegate {
 				expandView.viewToExpand(progTextView)
 				
 				progTextView.text = text[random(text.count)]
-				
-				progTextView.contentOffset = CGPointZero
-				
-				print(progTextView)
-				
+
 			case "UIImageView":
 				
-				let image = UIImage(named: "img\(random(3))")
-				
-				progImageView = UIImageView(frame: CGRectMake(0, 0, 600, (image?.size.height)!))
+				progImageView = UIImageView()
 				progImageView.contentMode = UIViewContentMode.ScaleAspectFit
-				
-
-				print(image)
 				
 				expandView.viewToExpand(progImageView)
 				
-				progImageView.image = image
-				
-//				h = NSLayoutConstraint(item: progImageView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute(rawValue: 0)!, multiplier: 1, constant: (image?.size.height)!)
-				
-//				progImageView.addConstraint(h)
-				
-//				print(progImageView.constraints.first)
+				progImageView.image = UIImage(named: "img\(random(3))")
 				
 			case "UIActivityWebView":
 				
-				progActivityWebView = UIActivityWebView(frame: CGRectMake(0,0,600,100))
+				progActivityWebView = UIActivityWebView()
 				progActivityWebView.delagate = self
 				
-				print("UIActivityWebView")
-				
 				expandView.viewToExpand(progActivityWebView)
-				
-//				progActivityWebView.addConstraint(NSLayoutConstraint(item: progActivityWebView, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute(rawValue: 0)!, multiplier: 1, constant: 100))
-				
+
 				progActivityWebView.webView.loadHTMLString(html[random(html.count)], baseURL: nil)
 				
 			default: ()
@@ -152,18 +129,10 @@ class DemoViewController: UIViewController, UIActivityWebViewDelegate {
 	
 	func webViewDidFinishLoad(webView: UIActivityWebView) {
 		expandView.layoutSubviews()
-		
-		print("load")
 	}
 	
 	@IBAction func switchAction(sender: AnyObject) {
-		
-		
-//		expandView.btnAction(UIButton)
-		
-//		progTextView.contentOffset = CGPointZero
-		
-		
+
 		switch (type ?? self.restorationIdentifier)! {
 			case "UILabel":
 				
@@ -183,28 +152,11 @@ class DemoViewController: UIViewController, UIActivityWebViewDelegate {
 			
 			case "UIImageView":
 				
-				let i = UIImage(named: "img\(random(3))")
-				
-				progImageView.image = i
-				
-				print(i)
-			
-//			expandView.cc.constant = (i?.size.height)!
-			
-//				h.constant = (i?.size.height)!
-			
-			
-				
-//				progImageView.layoutIfNeeded()
-			
-			
+				progImageView.image = UIImage(named: "img\(random(3))")
+	
 			case "single-vc-image", "scroll-vc-image":
 				
 				imageView.image = UIImage(named: "img\(random(3))")
-				
-				
-				
-//				progImageViewHeightConstraint.constant = (imageView.image?.size.height)!
 
 			case "UIActivityWebView":
 				

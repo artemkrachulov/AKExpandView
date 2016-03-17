@@ -128,17 +128,17 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jEm-zS-zJV">
-                                <rect key="frame" x="139" y="211" width="322" height="30"/>
+                                <rect key="frame" x="20" y="211" width="560" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gs9-Wo-Hwk">
-                                        <rect key="frame" x="0.0" y="0.0" width="175" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="gs9-Wo-Hwk">
+                                        <rect key="frame" x="0.0" y="0.0" width="272" height="30"/>
                                         <state key="normal" title="UILabel programmatically"/>
                                         <connections>
                                             <action selector="labelProgAction:" destination="4r5-od-BhV" eventType="touchUpInside" id="zbV-xg-kYN"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IDl-Ah-2ov">
-                                        <rect key="frame" x="191" y="0.0" width="131" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="IDl-Ah-2ov">
+                                        <rect key="frame" x="288" y="0.0" width="272" height="30"/>
                                         <state key="normal" title="UILabel storyboard"/>
                                         <connections>
                                             <action selector="labelAction:" destination="4r5-od-BhV" eventType="touchUpInside" id="DNs-Mw-8l8"/>
@@ -154,23 +154,24 @@
                                     <constraint firstItem="IDl-Ah-2ov" firstAttribute="top" secondItem="jEm-zS-zJV" secondAttribute="top" id="c7C-6Y-v1z"/>
                                     <constraint firstItem="gs9-Wo-Hwk" firstAttribute="top" secondItem="jEm-zS-zJV" secondAttribute="top" id="f8m-1N-3Qo"/>
                                     <constraint firstAttribute="trailing" secondItem="IDl-Ah-2ov" secondAttribute="trailing" id="hCd-nn-pxq"/>
+                                    <constraint firstItem="IDl-Ah-2ov" firstAttribute="width" secondItem="gs9-Wo-Hwk" secondAttribute="width" id="zqU-C7-ESu"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lox-cH-5ye">
-                                <rect key="frame" x="114" y="273" width="372" height="30"/>
+                                <rect key="frame" x="20" y="273" width="560" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xOr-bV-cVs">
-                                        <rect key="frame" x="0.0" y="0.0" width="200" height="30"/>
-                                        <state key="normal" title="UITextView programmatically"/>
-                                        <connections>
-                                            <action selector="textareaProgAction:" destination="4r5-od-BhV" eventType="touchUpInside" id="cSC-j0-gxK"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZjA-6p-OoH">
-                                        <rect key="frame" x="216" y="0.0" width="156" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ZjA-6p-OoH">
+                                        <rect key="frame" x="288" y="0.0" width="272" height="30"/>
                                         <state key="normal" title="UITextView storyboard"/>
                                         <connections>
                                             <action selector="textareaAction:" destination="4r5-od-BhV" eventType="touchUpInside" id="YEz-8M-Vum"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="xOr-bV-cVs">
+                                        <rect key="frame" x="0.0" y="0.0" width="272" height="30"/>
+                                        <state key="normal" title="UITextView programmatically"/>
+                                        <connections>
+                                            <action selector="textareaProgAction:" destination="4r5-od-BhV" eventType="touchUpInside" id="cSC-j0-gxK"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -181,25 +182,26 @@
                                     <constraint firstItem="xOr-bV-cVs" firstAttribute="top" secondItem="lox-cH-5ye" secondAttribute="top" id="PB9-sB-0J6"/>
                                     <constraint firstAttribute="trailing" secondItem="ZjA-6p-OoH" secondAttribute="trailing" id="U1V-L2-t5y"/>
                                     <constraint firstItem="xOr-bV-cVs" firstAttribute="leading" secondItem="lox-cH-5ye" secondAttribute="leading" id="tNC-tu-Wjs"/>
+                                    <constraint firstItem="xOr-bV-cVs" firstAttribute="width" secondItem="ZjA-6p-OoH" secondAttribute="width" id="xvy-d6-tBW"/>
                                     <constraint firstAttribute="bottom" secondItem="xOr-bV-cVs" secondAttribute="bottom" id="z53-FJ-vNY"/>
                                     <constraint firstItem="ZjA-6p-OoH" firstAttribute="leading" secondItem="xOr-bV-cVs" secondAttribute="trailing" constant="16" id="zJI-jf-zeA"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sgr-Ud-hUw">
-                                <rect key="frame" x="102" y="341" width="396" height="30"/>
+                                <rect key="frame" x="20" y="335" width="560" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Cf-vy-NEl">
-                                        <rect key="frame" x="0.0" y="0.0" width="212" height="30"/>
-                                        <state key="normal" title="UIImageView programmatically"/>
-                                        <connections>
-                                            <action selector="imageProgAction:" destination="4r5-od-BhV" eventType="touchUpInside" id="8DJ-00-a1M"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Sv-Sl-BH7">
-                                        <rect key="frame" x="228" y="0.0" width="168" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="5Sv-Sl-BH7">
+                                        <rect key="frame" x="288" y="0.0" width="272" height="30"/>
                                         <state key="normal" title="UIImageView storyboard"/>
                                         <connections>
                                             <action selector="imageAction:" destination="4r5-od-BhV" eventType="touchUpInside" id="z48-ay-qcr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="9Cf-vy-NEl">
+                                        <rect key="frame" x="0.0" y="0.0" width="272" height="30"/>
+                                        <state key="normal" title="UIImageView programmatically"/>
+                                        <connections>
+                                            <action selector="imageProgAction:" destination="4r5-od-BhV" eventType="touchUpInside" id="8DJ-00-a1M"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -208,6 +210,7 @@
                                     <constraint firstItem="9Cf-vy-NEl" firstAttribute="top" secondItem="sgr-Ud-hUw" secondAttribute="top" id="5zx-YG-exh"/>
                                     <constraint firstItem="5Sv-Sl-BH7" firstAttribute="top" secondItem="sgr-Ud-hUw" secondAttribute="top" id="A57-4B-4lP"/>
                                     <constraint firstAttribute="trailing" secondItem="5Sv-Sl-BH7" secondAttribute="trailing" id="HPK-JE-kYs"/>
+                                    <constraint firstItem="5Sv-Sl-BH7" firstAttribute="width" secondItem="9Cf-vy-NEl" secondAttribute="width" id="Kpk-xT-ezr"/>
                                     <constraint firstItem="9Cf-vy-NEl" firstAttribute="leading" secondItem="sgr-Ud-hUw" secondAttribute="leading" id="U9J-yS-wlu"/>
                                     <constraint firstItem="5Sv-Sl-BH7" firstAttribute="leading" secondItem="9Cf-vy-NEl" secondAttribute="trailing" constant="16" id="iIu-NV-u0p"/>
                                     <constraint firstAttribute="bottom" secondItem="5Sv-Sl-BH7" secondAttribute="bottom" id="jwJ-U0-71H"/>
@@ -215,17 +218,17 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hzI-Z4-5vT">
-                                <rect key="frame" x="62" y="417" width="476" height="30"/>
+                                <rect key="frame" x="20" y="397" width="560" height="30"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ucI-PP-bCR">
-                                        <rect key="frame" x="0.0" y="0.0" width="252" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ucI-PP-bCR">
+                                        <rect key="frame" x="0.0" y="0.0" width="272" height="30"/>
                                         <state key="normal" title="UIActivityWebView programmatically"/>
                                         <connections>
                                             <action selector="webProgAction:" destination="4r5-od-BhV" eventType="touchUpInside" id="2DY-lR-wr8"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dd8-Vk-aeU">
-                                        <rect key="frame" x="268" y="0.0" width="208" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="dd8-Vk-aeU">
+                                        <rect key="frame" x="288" y="0.0" width="272" height="30"/>
                                         <state key="normal" title="UIActivityWebView storyboard"/>
                                         <connections>
                                             <action selector="webAction:" destination="4r5-od-BhV" eventType="touchUpInside" id="kdZ-Xn-wex"/>
@@ -241,22 +244,29 @@
                                     <constraint firstAttribute="trailing" secondItem="dd8-Vk-aeU" secondAttribute="trailing" id="SZA-N7-R0g"/>
                                     <constraint firstAttribute="bottom" secondItem="ucI-PP-bCR" secondAttribute="bottom" id="WTj-Gs-HnO"/>
                                     <constraint firstItem="dd8-Vk-aeU" firstAttribute="leading" secondItem="ucI-PP-bCR" secondAttribute="trailing" constant="16" id="gDq-xS-IC9"/>
+                                    <constraint firstItem="dd8-Vk-aeU" firstAttribute="width" secondItem="ucI-PP-bCR" secondAttribute="width" id="xyw-6z-pAD"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="jEm-zS-zJV" firstAttribute="top" secondItem="KEB-CM-xVG" secondAttribute="bottom" constant="12" id="2Rg-z0-qkJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="lox-cH-5ye" secondAttribute="trailing" id="2eg-OT-3We"/>
+                            <constraint firstItem="hzI-Z4-5vT" firstAttribute="leading" secondItem="8BB-9B-jIe" secondAttribute="leadingMargin" id="56u-7u-3bj"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hzI-Z4-5vT" secondAttribute="trailing" id="6jn-nV-w0f"/>
                             <constraint firstItem="lox-cH-5ye" firstAttribute="top" secondItem="jEm-zS-zJV" secondAttribute="bottom" constant="32" id="AiB-b6-8vy"/>
-                            <constraint firstItem="hzI-Z4-5vT" firstAttribute="top" secondItem="sgr-Ud-hUw" secondAttribute="bottom" constant="46" id="BbB-7u-asq"/>
+                            <constraint firstItem="hzI-Z4-5vT" firstAttribute="top" secondItem="sgr-Ud-hUw" secondAttribute="bottom" constant="32" id="BbB-7u-asq"/>
                             <constraint firstItem="sgr-Ud-hUw" firstAttribute="centerX" secondItem="8BB-9B-jIe" secondAttribute="centerX" id="Evo-C1-BRX"/>
+                            <constraint firstItem="jEm-zS-zJV" firstAttribute="leading" secondItem="8BB-9B-jIe" secondAttribute="leadingMargin" id="FEr-FB-QsO"/>
                             <constraint firstItem="GaK-rh-yeb" firstAttribute="leading" secondItem="8BB-9B-jIe" secondAttribute="leadingMargin" id="K7C-2F-sas"/>
                             <constraint firstItem="KEB-CM-xVG" firstAttribute="top" secondItem="GaK-rh-yeb" secondAttribute="bottom" constant="8" id="KUF-SE-rPc"/>
-                            <constraint firstItem="hzI-Z4-5vT" firstAttribute="centerX" secondItem="8BB-9B-jIe" secondAttribute="centerX" id="Tqb-8n-qKx"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sgr-Ud-hUw" secondAttribute="trailing" id="Ncs-6U-iaC"/>
                             <constraint firstAttribute="trailingMargin" secondItem="GaK-rh-yeb" secondAttribute="trailing" id="XOm-W3-2cW"/>
                             <constraint firstAttribute="trailingMargin" secondItem="KEB-CM-xVG" secondAttribute="trailing" constant="160" id="cGd-zA-N3U"/>
-                            <constraint firstItem="sgr-Ud-hUw" firstAttribute="top" secondItem="lox-cH-5ye" secondAttribute="bottom" constant="38" id="jfk-dk-yWr"/>
-                            <constraint firstItem="jEm-zS-zJV" firstAttribute="centerX" secondItem="8BB-9B-jIe" secondAttribute="centerX" id="nUb-E4-YHD"/>
+                            <constraint firstItem="sgr-Ud-hUw" firstAttribute="leading" secondItem="8BB-9B-jIe" secondAttribute="leadingMargin" id="cIW-gz-x7q"/>
+                            <constraint firstItem="sgr-Ud-hUw" firstAttribute="top" secondItem="lox-cH-5ye" secondAttribute="bottom" constant="32" id="jfk-dk-yWr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="jEm-zS-zJV" secondAttribute="trailing" id="l7s-ER-Y0u"/>
+                            <constraint firstItem="lox-cH-5ye" firstAttribute="leading" secondItem="8BB-9B-jIe" secondAttribute="leadingMargin" id="o0k-YA-cSe"/>
                             <constraint firstItem="GaK-rh-yeb" firstAttribute="top" secondItem="YhW-Pt-taz" secondAttribute="bottom" constant="100" id="rmc-9S-xRe"/>
                             <constraint firstItem="lox-cH-5ye" firstAttribute="centerX" secondItem="8BB-9B-jIe" secondAttribute="centerX" id="tG0-sR-Pwl"/>
                             <constraint firstItem="KEB-CM-xVG" firstAttribute="leading" secondItem="8BB-9B-jIe" secondAttribute="leadingMargin" constant="160" id="xpq-Lj-awh"/>

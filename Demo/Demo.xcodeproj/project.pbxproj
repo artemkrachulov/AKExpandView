@@ -457,7 +457,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "-D AKDEBUG";
+				OTHER_SWIFT_FLAGS = "-D AKExpandViewDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.artemkrachulov.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -469,7 +469,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "-D AKRELEASE";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.artemkrachulov.Demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
