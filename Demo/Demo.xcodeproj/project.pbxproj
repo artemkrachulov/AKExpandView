@@ -91,12 +91,12 @@
 		4384B21B1C7F1DD900185A20 = {
 			isa = PBXGroup;
 			children = (
+				4384B2551C7F1EB000185A20 /* AKExpandView */,
 				43941EF31C90158000A5508D /* Vendor */,
 				4384B2261C7F1DD900185A20 /* Demo */,
 				4384B23B1C7F1DD900185A20 /* DemoTests */,
 				4384B2461C7F1DD900185A20 /* DemoUITests */,
 				4384B2251C7F1DD900185A20 /* Products */,
-				4384B2551C7F1EB000185A20 /* AKExpandView */,
 			);
 			sourceTree = "<group>";
 		};
