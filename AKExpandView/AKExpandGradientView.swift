@@ -4,9 +4,12 @@ class AKExpandGradientView: UIView {
 	
 	var startColor, endColor: UIColor!
 
+
   override func drawRect(rect: CGRect) {
 		if startColor != nil && endColor != nil {
 			
+
+      
 			let currentContext = UIGraphicsGetCurrentContext()
 			CGContextSaveGState(currentContext)
 			

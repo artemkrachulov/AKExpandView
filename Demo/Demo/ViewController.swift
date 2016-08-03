@@ -8,26 +8,12 @@
 
 import UIKit
 
-class ViewController: UIViewController,UIWebViewDelegate {
-
-	
-	override func viewDidLoad() {
-		super.viewDidLoad()
-		
-		let i = UIImageView(frame: CGRectMake(0,0,100,100))
-				i.image = UIImage(named: "img")
-				view.addSubview(i)
-		print("AA")
-	}
-	
+class ViewController: UIViewController {
+  
 	override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-		if let yourVC = segue.destinationViewController as? TypesViewController {
-			yourVC.scroll = segue.identifier == "scroll"
+		if let typesViewController = segue.destinationViewController as? TypesViewController {
+      
+			typesViewController.constraints = segue.identifier == "constraints"
 		}
 	}
-	
-	
-	
-	
 }
-

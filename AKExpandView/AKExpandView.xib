@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -7,37 +7,40 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="AKExpandView" customModule="Demo" customModuleProvider="target">
             <connections>
-                <outlet property="actionContainerHeightConstraint" destination="7Bl-hG-hRY" id="3qQ-uF-y1v"/>
-                <outlet property="actionContainerView" destination="A7g-DS-aW6" id="bLZ-hF-MP1"/>
-                <outlet property="actionView" destination="bZp-C6-XyJ" id="ch2-5J-wbX"/>
-                <outlet property="btn" destination="BTe-Hf-75b" id="PRX-Mn-Xon"/>
+                <outlet property="actionBtn" destination="aNU-z2-NC8" id="zlc-68-cBA"/>
+                <outlet property="actionView" destination="1jt-MM-zlR" id="vXZ-dk-o82"/>
                 <outlet property="expandContainerView" destination="ARb-q5-bx2" id="DTU-QQ-6eZ"/>
+                <outlet property="expandContainerViewHeightConstraint" destination="bOy-fp-EA9" id="PfZ-Fj-2yP"/>
                 <outlet property="expandWrapperView" destination="8vg-Su-305" id="i1I-83-hxf"/>
                 <outlet property="expandWrapperViewHeightConstraint" destination="4qg-1c-1GY" id="wkf-zc-l8q"/>
-                <outlet property="gradientView" destination="t4d-aD-TTt" id="Rjl-oP-3MN"/>
+                <outlet property="gradientView" destination="t4d-aD-TTt" id="ofk-L2-jCC"/>
+                <outlet property="gradientViewHeightConstraint" destination="GZg-r3-xbc" id="ErE-SY-2rG"/>
+                <outlet property="gradientView_superView_bottomConstraint" destination="dt5-UC-Iih" id="OB0-t6-3xt"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="xlf-W6-TUW">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="400"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="xlf-W6-TUW">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="66"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8vg-Su-305">
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8vg-Su-305">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="0.0"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t4d-aD-TTt" customClass="AKExpandGradientView" customModule="Demo" customModuleProvider="target">
+                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ARb-q5-bx2">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="0.0"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ARb-q5-bx2">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="0.0"/>
-                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" id="bOy-fp-EA9"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t4d-aD-TTt" customClass="AKExpandGradientView" customModule="Demo" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="0.0"/>
+                            <constraints>
+                                <constraint firstAttribute="height" id="GZg-r3-xbc"/>
+                            </constraints>
+                        </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" id="4qg-1c-1GY"/>
                         <constraint firstItem="t4d-aD-TTt" firstAttribute="leading" secondItem="8vg-Su-305" secondAttribute="leading" id="CZa-fm-WEW"/>
@@ -46,52 +49,43 @@
                         <constraint firstItem="ARb-q5-bx2" firstAttribute="top" secondItem="8vg-Su-305" secondAttribute="top" id="dcZ-yy-Uc7"/>
                         <constraint firstAttribute="bottom" secondItem="t4d-aD-TTt" secondAttribute="bottom" id="dt5-UC-Iih"/>
                         <constraint firstAttribute="trailing" secondItem="ARb-q5-bx2" secondAttribute="trailing" id="l5R-Mr-xhi"/>
-                        <constraint firstItem="t4d-aD-TTt" firstAttribute="height" secondItem="8vg-Su-305" secondAttribute="height" id="wbY-Fv-ADU"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A7g-DS-aW6">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="0.0"/>
-                    <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1jt-MM-zlR">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="66"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aNU-z2-NC8">
+                            <rect key="frame" x="0.0" y="16" width="600" height="50"/>
+                            <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="0Ce-48-E0c"/>
+                            </constraints>
+                            <state key="normal" title="Button"/>
+                            <connections>
+                                <action selector="toggle:" destination="-1" eventType="touchUpInside" id="IGv-Tn-eTG"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.65098041299999998" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" id="7Bl-hG-hRY"/>
+                        <constraint firstItem="aNU-z2-NC8" firstAttribute="top" secondItem="1jt-MM-zlR" secondAttribute="top" constant="16" id="SY2-qc-EP7"/>
+                        <constraint firstAttribute="bottom" secondItem="aNU-z2-NC8" secondAttribute="bottom" id="XjO-5s-OIW"/>
+                        <constraint firstItem="aNU-z2-NC8" firstAttribute="leading" secondItem="1jt-MM-zlR" secondAttribute="leading" id="nCq-g9-o69"/>
+                        <constraint firstAttribute="trailing" secondItem="aNU-z2-NC8" secondAttribute="trailing" id="vHh-1I-ong"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.36078432199999999" green="0.64313727620000005" blue="1" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="8vg-Su-305" firstAttribute="top" secondItem="xlf-W6-TUW" secondAttribute="top" id="GiV-9r-Rzc"/>
                 <constraint firstItem="8vg-Su-305" firstAttribute="leading" secondItem="xlf-W6-TUW" secondAttribute="leading" id="JGh-sZ-Dnv"/>
-                <constraint firstItem="A7g-DS-aW6" firstAttribute="top" secondItem="8vg-Su-305" secondAttribute="bottom" id="MEd-Cx-EaX"/>
+                <constraint firstItem="1jt-MM-zlR" firstAttribute="leading" secondItem="xlf-W6-TUW" secondAttribute="leading" id="V4Q-SL-7Dy"/>
                 <constraint firstAttribute="trailing" secondItem="8vg-Su-305" secondAttribute="trailing" id="Wux-oF-yQe"/>
-                <constraint firstAttribute="trailing" secondItem="A7g-DS-aW6" secondAttribute="trailing" id="icL-2y-eOU"/>
-                <constraint firstItem="A7g-DS-aW6" firstAttribute="leading" secondItem="xlf-W6-TUW" secondAttribute="leading" id="zfb-pa-Byk"/>
+                <constraint firstItem="1jt-MM-zlR" firstAttribute="top" secondItem="8vg-Su-305" secondAttribute="bottom" id="mNM-VU-NRJ"/>
+                <constraint firstAttribute="trailing" secondItem="1jt-MM-zlR" secondAttribute="trailing" id="zE8-ia-z0E"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="398" y="34"/>
-        </view>
-        <view contentMode="scaleToFill" id="bZp-C6-XyJ">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="70"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <subviews>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BTe-Hf-75b">
-                    <rect key="frame" x="0.0" y="10" width="600" height="50"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="50" id="Vu6-EJ-T1e"/>
-                    </constraints>
-                    <state key="normal" title="Button"/>
-                    <connections>
-                        <action selector="btnAction:" destination="-1" eventType="touchUpInside" id="eaJ-Zg-haL"/>
-                    </connections>
-                </button>
-            </subviews>
-            <constraints>
-                <constraint firstItem="BTe-Hf-75b" firstAttribute="leading" secondItem="bZp-C6-XyJ" secondAttribute="leading" id="0E3-eI-4Pm"/>
-                <constraint firstAttribute="trailing" secondItem="BTe-Hf-75b" secondAttribute="trailing" id="KRe-KB-B6c"/>
-                <constraint firstAttribute="bottom" secondItem="BTe-Hf-75b" secondAttribute="bottom" constant="10" id="RaG-JK-FuF"/>
-                <constraint firstItem="BTe-Hf-75b" firstAttribute="top" secondItem="bZp-C6-XyJ" secondAttribute="top" constant="10" id="TCB-ol-CNI"/>
-            </constraints>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="398" y="384"/>
+            <point key="canvasLocation" x="309" y="160"/>
         </view>
     </objects>
 </document>

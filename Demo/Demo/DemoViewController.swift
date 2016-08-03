@@ -8,12 +8,15 @@
 
 import UIKit
 
-class DemoViewController: UIViewController, UIActivityWebViewDelegate {
+class DemoViewController: UIViewController {
 	
+  var navigationItemTitle: String!
+  
 	// MARK: - Outlets
 	//         _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
 	
-	@IBOutlet weak var expandView: AKExpandView!
+	@IBOutlet weak var expandView: AKExpandView?
+  
 	
 	@IBOutlet weak var label: UILabel!
 	
@@ -22,9 +25,10 @@ class DemoViewController: UIViewController, UIActivityWebViewDelegate {
 	@IBOutlet weak var imageView: UIImageView!
 	
 	
-	@IBOutlet weak var activityWebView: UIActivityWebView!  {
+	@IBOutlet weak var activityWebView: AKActivityWebView!  {
 		didSet {
-			activityWebView.delagate = self
+			activityWebView.delegate = self
+      activityWebView.webView.scrollView.scrollEnabled = false
 		}
 	}
 	
@@ -33,9 +37,13 @@ class DemoViewController: UIViewController, UIActivityWebViewDelegate {
 	var progTextView: UITextView!
 	
 	var progImageView: UIImageView!
-	@IBOutlet weak var progImageViewHeightConstraint: NSLayoutConstraint!
 	
-	var progActivityWebView: UIActivityWebView!
+	
+  var progActivityWebView: AKActivityWebView!  {
+    didSet {
+		    progActivityWebView.webView.scrollView.scrollEnabled = false
+    }
+  }
 	
 	// MARK: - Properties
 	//         _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
@@ -69,16 +77,18 @@ class DemoViewController: UIViewController, UIActivityWebViewDelegate {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
+    
+
 		if type != nil {
+      navigationItem.title = "\(type) \(navigationItem.title!)"
 			switch type {
 			case "UILabel":
 				
 				progLabel = UILabel()
 				progLabel.numberOfLines = 0
 				
-				expandView.viewToExpand(progLabel)
-				
+				expandView?.viewToExpand(progLabel)
+        
 				progLabel.text = text[random(text.count)]
 				
 			case "UITextView":
@@ -87,50 +97,42 @@ class DemoViewController: UIViewController, UIActivityWebViewDelegate {
 				progTextView.scrollEnabled = false
 				progTextView.font = UIFont(name: "Helvetica", size: 17)
 				
-				expandView.viewToExpand(progTextView)
+				expandView?.viewToExpand(progTextView)
 				
 				progTextView.text = text[random(text.count)]
 
-			case "UIImageView":
+			case "UIImageView": ()
 				
 				progImageView = UIImageView()
 				progImageView.contentMode = UIViewContentMode.ScaleAspectFit
 				
-				expandView.viewToExpand(progImageView)
+				expandView?.viewToExpand(progImageView)
 				
 				progImageView.image = UIImage(named: "img\(random(3))")
 				
-			case "UIActivityWebView":
+			case "AKActivityWebView":
 				
-				progActivityWebView = UIActivityWebView()
-				progActivityWebView.delagate = self
+				progActivityWebView = AKActivityWebView()
+				progActivityWebView.delegate = self
 				
-				expandView.viewToExpand(progActivityWebView)
+				expandView?.viewToExpand(progActivityWebView)
 
 				progActivityWebView.webView.loadHTMLString(html[random(html.count)], baseURL: nil)
-				
+
 			default: ()
 			}
 		}
-		
+
 		if let id = self.restorationIdentifier {
 			switch id {
-			case "scroll-vc-web", "single-vc-web":
-				
+			case "constraints-AKActivityWebView", "clear-AKActivityWebView":
 				activityWebView.webView.loadHTMLString(html[random(html.count)], baseURL: nil)
-				
 			default: ()
 			}
 		}
 	}
-	
-	// MARK: - UIActivityWebViewDelegate
-	//         _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-	
-	func webViewDidFinishLoad(webView: UIActivityWebView) {
-		expandView.layoutSubviews()
-	}
-	
+
+
 	@IBAction func switchAction(sender: AnyObject) {
 
 		switch (type ?? self.restorationIdentifier)! {
@@ -138,7 +140,7 @@ class DemoViewController: UIViewController, UIActivityWebViewDelegate {
 				
 				progLabel.text = text[random(text.count)]
 			
-			case "single-vc-label", "scroll-vc-label":
+			case "constraints-UILabel", "clear-UILabel":
 				
 				label.text = text[random(text.count)]
 			
@@ -146,7 +148,7 @@ class DemoViewController: UIViewController, UIActivityWebViewDelegate {
 				
 				progTextView.text = text[random(text.count)]
 			
-			case "single-vc-textarea", "scroll-vc-textarea":
+			case "constraints-UITextView", "clear-UITextView":
 				
 				textView.text = text[random(text.count)]
 			
@@ -154,21 +156,29 @@ class DemoViewController: UIViewController, UIActivityWebViewDelegate {
 				
 				progImageView.image = UIImage(named: "img\(random(3))")
 	
-			case "single-vc-image", "scroll-vc-image":
+			case "constraints-UIImageView", "clear-UIImageView":
 				
 				imageView.image = UIImage(named: "img\(random(3))")
 
-			case "UIActivityWebView":
+			case "AKActivityWebView":
 				
 				progActivityWebView.webView.loadHTMLString(html[random(html.count)], baseURL: nil)
 	
-			case "single-vc-web", "scroll-vc-web":
+			case "constraints-AKActivityWebView", "clear-AKActivityWebView":
 				
 				activityWebView.webView.loadHTMLString(html[random(html.count)], baseURL: nil)
 			
 			default: ()
 		}
 
-		expandView.layoutSubviews()
+    expandView?.layoutSubviews()
 	}
+}
+
+extension DemoViewController: AKActivityWebViewDelegate {
+  
+  func wwebViewDidFinishLoad(webView: AKActivityWebView) {
+    expandView?.layoutSubviews()
+  }
+  
 }
