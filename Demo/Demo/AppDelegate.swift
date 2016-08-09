@@ -1,9 +1,10 @@
 //
 //  AppDelegate.swift
-//  Demo
+//  AKExpandView demo
 //
-//  Created by Krachulov Artem  on 2/25/16.
-//  Copyright © 2016 Krachulov Artem . All rights reserved.
+//  Created by Artem Krachulov
+//  Copyright (c) 2016 Artem Krachulov. All rights reserved.
+//  Website: http://www.artemkrachulov.com/
 //
 
 import UIKit

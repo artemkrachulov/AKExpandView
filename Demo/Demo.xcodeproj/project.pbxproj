@@ -9,13 +9,8 @@
 /* Begin PBXBuildFile section */
 		43678F8C1C86D6DE00F6D0A6 /* TypesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43678F8B1C86D6DE00F6D0A6 /* TypesViewController.swift */; };
 		4375924C1D4F36C000881C28 /* AKExpandGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437592471D4F36C000881C28 /* AKExpandGradientView.swift */; };
-		4375924D1D4F36C000881C28 /* AKExpandToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437592481D4F36C000881C28 /* AKExpandToggleView.swift */; };
 		4375924E1D4F36C000881C28 /* AKExpandView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437592491D4F36C000881C28 /* AKExpandView.swift */; };
-		4375924F1D4F36C000881C28 /* AKExpandView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4375924A1D4F36C000881C28 /* AKExpandView.xib */; };
-		437592501D4F36C000881C28 /* AKToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4375924B1D4F36C000881C28 /* AKToggleView.swift */; };
-		437592541D4F3FB300881C28 /* AKToggleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 437592531D4F3FB300881C28 /* AKToggleView.xib */; };
 		4375925D1D4F89E000881C28 /* AKActivityWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4375925B1D4F89E000881C28 /* AKActivityWebView.swift */; };
-		4375925E1D4F89E000881C28 /* AKActivityWebView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4375925C1D4F89E000881C28 /* AKActivityWebView.xib */; };
 		4384B2281C7F1DD900185A20 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4384B2271C7F1DD900185A20 /* AppDelegate.swift */; };
 		4384B22A1C7F1DD900185A20 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4384B2291C7F1DD900185A20 /* ViewController.swift */; };
 		4384B22D1C7F1DD900185A20 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4384B22B1C7F1DD900185A20 /* Main.storyboard */; };
@@ -24,7 +19,6 @@
 		4384B23D1C7F1DD900185A20 /* DemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4384B23C1C7F1DD900185A20 /* DemoTests.swift */; };
 		4384B2481C7F1DD900185A20 /* DemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4384B2471C7F1DD900185A20 /* DemoUITests.swift */; };
 		4399BCEB1C809ACE00A200CD /* DemoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4399BCEA1C809ACE00A200CD /* DemoViewController.swift */; };
-		43E79C2A1C9AACB300C00B77 /* UIView+loadFromXibNib.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43E79C291C9AACB300C00B77 /* UIView+loadFromXibNib.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,13 +41,8 @@
 /* Begin PBXFileReference section */
 		43678F8B1C86D6DE00F6D0A6 /* TypesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypesViewController.swift; sourceTree = "<group>"; };
 		437592471D4F36C000881C28 /* AKExpandGradientView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AKExpandGradientView.swift; path = ../AKExpandView/AKExpandGradientView.swift; sourceTree = "<group>"; };
-		437592481D4F36C000881C28 /* AKExpandToggleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AKExpandToggleView.swift; path = ../AKExpandView/AKExpandToggleView.swift; sourceTree = "<group>"; };
 		437592491D4F36C000881C28 /* AKExpandView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AKExpandView.swift; path = ../AKExpandView/AKExpandView.swift; sourceTree = "<group>"; };
-		4375924A1D4F36C000881C28 /* AKExpandView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AKExpandView.xib; path = ../AKExpandView/AKExpandView.xib; sourceTree = "<group>"; };
-		4375924B1D4F36C000881C28 /* AKToggleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AKToggleView.swift; path = ../AKExpandView/AKToggleView.swift; sourceTree = "<group>"; };
-		437592531D4F3FB300881C28 /* AKToggleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AKToggleView.xib; sourceTree = "<group>"; };
 		4375925B1D4F89E000881C28 /* AKActivityWebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AKActivityWebView.swift; path = ../../AKActivityWebView/AKActivityWebView/AKActivityWebView.swift; sourceTree = "<group>"; };
-		4375925C1D4F89E000881C28 /* AKActivityWebView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AKActivityWebView.xib; path = ../../AKActivityWebView/AKActivityWebView/AKActivityWebView.xib; sourceTree = "<group>"; };
 		4384B2241C7F1DD900185A20 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4384B2271C7F1DD900185A20 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4384B2291C7F1DD900185A20 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -68,7 +57,6 @@
 		4384B2471C7F1DD900185A20 /* DemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoUITests.swift; sourceTree = "<group>"; };
 		4384B2491C7F1DD900185A20 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4399BCEA1C809ACE00A200CD /* DemoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoViewController.swift; sourceTree = "<group>"; };
-		43E79C291C9AACB300C00B77 /* UIView+loadFromXibNib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIView+loadFromXibNib.swift"; path = "../Vendor/UIView-loadFromXibNib/Source/UIView+loadFromXibNib.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,31 +84,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		437592551D4F3FB800881C28 /* Toggle */ = {
+		437592561D4F3FBE00881C28 /* AKExpandView */ = {
 			isa = PBXGroup;
 			children = (
-				4375924B1D4F36C000881C28 /* AKToggleView.swift */,
-				437592531D4F3FB300881C28 /* AKToggleView.xib */,
-			);
-			name = Toggle;
-			sourceTree = "<group>";
-		};
-		437592561D4F3FBE00881C28 /* Expand */ = {
-			isa = PBXGroup;
-			children = (
-				437592471D4F36C000881C28 /* AKExpandGradientView.swift */,
 				437592491D4F36C000881C28 /* AKExpandView.swift */,
-				4375924A1D4F36C000881C28 /* AKExpandView.xib */,
+				437592471D4F36C000881C28 /* AKExpandGradientView.swift */,
 			);
-			name = Expand;
+			name = AKExpandView;
 			sourceTree = "<group>";
 		};
 		4384B21B1C7F1DD900185A20 = {
 			isa = PBXGroup;
 			children = (
-				437592481D4F36C000881C28 /* AKExpandToggleView.swift */,
-				437592561D4F3FBE00881C28 /* Expand */,
-				437592551D4F3FB800881C28 /* Toggle */,
+				437592561D4F3FBE00881C28 /* AKExpandView */,
 				43941EF31C90158000A5508D /* Vendor */,
 				4384B2261C7F1DD900185A20 /* Demo */,
 				4384B23B1C7F1DD900185A20 /* DemoTests */,
@@ -176,8 +152,6 @@
 			isa = PBXGroup;
 			children = (
 				4375925B1D4F89E000881C28 /* AKActivityWebView.swift */,
-				4375925C1D4F89E000881C28 /* AKActivityWebView.xib */,
-				43E79C291C9AACB300C00B77 /* UIView+loadFromXibNib.swift */,
 			);
 			name = Vendor;
 			sourceTree = "<group>";
@@ -288,9 +262,6 @@
 			files = (
 				4384B2321C7F1DD900185A20 /* LaunchScreen.storyboard in Resources */,
 				4384B22F1C7F1DD900185A20 /* Assets.xcassets in Resources */,
-				4375925E1D4F89E000881C28 /* AKActivityWebView.xib in Resources */,
-				4375924F1D4F36C000881C28 /* AKExpandView.xib in Resources */,
-				437592541D4F3FB300881C28 /* AKToggleView.xib in Resources */,
 				4384B22D1C7F1DD900185A20 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,12 +287,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43E79C2A1C9AACB300C00B77 /* UIView+loadFromXibNib.swift in Sources */,
-				437592501D4F36C000881C28 /* AKToggleView.swift in Sources */,
 				4384B22A1C7F1DD900185A20 /* ViewController.swift in Sources */,
 				4384B2281C7F1DD900185A20 /* AppDelegate.swift in Sources */,
 				4375925D1D4F89E000881C28 /* AKActivityWebView.swift in Sources */,
-				4375924D1D4F36C000881C28 /* AKExpandToggleView.swift in Sources */,
 				4399BCEB1C809ACE00A200CD /* DemoViewController.swift in Sources */,
 				4375924E1D4F36C000881C28 /* AKExpandView.swift in Sources */,
 				4375924C1D4F36C000881C28 /* AKExpandGradientView.swift in Sources */,

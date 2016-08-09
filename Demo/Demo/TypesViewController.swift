@@ -1,55 +1,63 @@
 //
 //  TypesViewController.swift
-//  Demo
+//  AKExpandView demo
 //
-//  Created by Krachulov Artem  on 3/2/16.
-//  Copyright © 2016 Krachulov Artem . All rights reserved.
+//  Created by Artem Krachulov
+//  Copyright (c) 2016 Artem Krachulov. All rights reserved.
+//  Website: http://www.artemkrachulov.com/
 //
 
 import UIKit
 
-class TypesViewController: UIViewController {
+final class TypesViewController: UIViewController {
   
   //  MARK: Properties
 
-	var constraints: Bool!
-	var id: String {
+	internal var constraints: Bool!
+	private var id: String {
 		return constraints == true ? "constraints" : "clear"
 	}
   
 	// MARK: - Actions
   
 	@IBAction func labelProgAction(sender: AnyObject) {
-		showVC(id, type: "UILabel")
+		showNextViewConstroller(id, type: "UILabel")
 	}
+  
 	@IBAction func textareaProgAction(sender: AnyObject) {
-		showVC(id, type:"UITextView")
+		showNextViewConstroller(id, type:"UITextView")
 	}
+  
 	@IBAction func imageProgAction(sender: AnyObject) {
-		showVC(id, type:"UIImageView")
+		showNextViewConstroller(id, type:"UIImageView")
 	}
+  
 	@IBAction func webProgAction(sender: AnyObject) {
-		showVC(id, type:"AKActivityWebView")
+		showNextViewConstroller(id, type:"AKActivityWebView")
 	}
+  
 	@IBAction func labelAction(sender: AnyObject) {
-		showVC(id + "-UILabel")
+		showNextViewConstroller(id + "-UILabel")
 	}
+  
 	@IBAction func textareaAction(sender: AnyObject) {
-		showVC(id + "-UITextView")
+		showNextViewConstroller(id + "-UITextView")
 	}
+  
 	@IBAction func imageAction(sender: AnyObject) {
-		showVC(id + "-UIImageView")
+		showNextViewConstroller(id + "-UIImageView")
 	}
+  
 	@IBAction func webAction(sender: AnyObject) {
-		showVC(id + "-AKActivityWebView")
+		showNextViewConstroller(id + "-AKActivityWebView")
 	}
 	
 	// MARK: - Helper
 
-	private func showVC(id: String, type: String! = nil) {
+	private func showNextViewConstroller(id: String, type: String! = nil) {
 		
-		let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(id) as! DemoViewController
-				vc.type = type
-		navigationController?.pushViewController(vc, animated: true)
+		let nextViewConstroller = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier(id) as! DemoViewController
+				nextViewConstroller.type = type
+		navigationController?.pushViewController(nextViewConstroller, animated: true)
 	}
 }
