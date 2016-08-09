@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  AKExpandView demo
+//  Demo
 //
 //  Created by Artem Krachulov
 //  Copyright (c) 2016 Artem Krachulov. All rights reserved.

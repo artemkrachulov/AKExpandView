@@ -22,6 +22,7 @@ final class AKExpandGradientView: UIView  {
     guard let startColor = startColor, endColor = endColor else {
       return
     }
+    print(startColor, endColor)
 
     let currentContext = UIGraphicsGetCurrentContext()
     CGContextSaveGState(currentContext)

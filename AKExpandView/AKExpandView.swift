@@ -39,27 +39,27 @@ public struct AKExpandViewAnimationOptions {
   
   /// Tells the delegate when view will be expanded.
   ///
-  /// - parameter expandView: Expand view object
-  /// - parameter viewToExpand: A view which was added to expand view object
-  optional func expandView(expandView: AKExpandView, willExpandView viewToExpand: UIView)
+  /// - parameter expandView: The main object.
+  /// - parameter view: Target view to expand.
+  optional func expandView(expandView: AKExpandView, willExpandView view: UIView)
 
   /// Tells the delegate when view was expanded.
   ///
-  /// - parameter expandView: Expand view object
-  /// - parameter viewToExpand: A view which was added to expand view object
-  optional func expandView(expandView: AKExpandView, didExpandView viewToExpand: UIView)
+  /// - parameter expandView: The main object.
+  /// - parameter expandedView: Expanded view.
+  optional func expandView(expandView: AKExpandView, didExpandView expandedView: UIView)
   
   /// Tells the delegate when view will be collapsed.
   ///
-  /// - parameter expandView: Expand view object
-  /// - parameter viewToExpand: A view which was added to expand view object
-  optional func expandView(expandView: AKExpandView, willCollapseView viewToExpand: UIView)
+  /// - parameter expandView: The main object.
+  /// - parameter view: Target view to collapse.
+  optional func expandView(expandView: AKExpandView, willCollapseView view: UIView)
   
   /// Tells the delegate when view was collapsed.
   ///
-  /// - parameter expandView: Expand view object
-  /// - parameter viewToExpand: A view which was added to expand view object
-  optional func expandView(expandView: AKExpandView, didCollapseView viewToExpand: UIView)
+  /// - parameter expandView: The main object.
+  /// - parameter collapsedView: Collapsed view.
+  optional func expandView(expandView: AKExpandView, didCollapseView collapsedView: UIView)
 }
 
 /// A lightweight Swift plugin for collapsing and expanding views, with adding "Read more..." and "Read less..." action button.
@@ -67,11 +67,17 @@ public struct AKExpandViewAnimationOptions {
 /// Example of usage:
 ///
 /// ```
-/// var label = UILabel()
-/// label.numberOfLines = 0
-/// label.text = "..."
+/// @IBOutlet weak var expandView: AKExpandView!
 ///
-/// expandView.viewToExpand(label)
+/// override func viewDidLoad() {
+///   super.viewDidLoad()
+///
+///   var label = UILabel()
+///   label.numberOfLines = 0
+///   label.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+///
+///   expandView.viewToExpand(label)
+/// }
 /// ```
 ///
 /// For more information click here [GitHub](https://github.com/artemkrachulov/AKExpandView)
@@ -90,7 +96,7 @@ public class AKExpandView: UIView {
     private var expandContainerViewHeightConstraint: NSLayoutConstraint?
   
       /// A view which you want to expand
-      public var expandView: UIView!
+      private(set) var expandView: UIView!
       private var expandViewHeightContraint: NSLayoutConstraint?
   
     private var gradientView: AKExpandGradientView!
@@ -102,31 +108,60 @@ public class AKExpandView: UIView {
   private var actionBtnHeightConstraint: NSLayoutConstraint!
   public var actionBtn: UIButton!
   
-  /// Delegate
-  weak var delegate: AKExpandViewDelegate?
+  //  MARK: Set up
+  //  MARK: Content heights
   
-  //  MARK: Flags
-  
-  /// Current state of expand view
-  /// The initial value of this property is `false`. Resets after adding new subview.
-  private(set) var isExpanded: Bool = false
-  
-  //  MARK: Settings
-  
-  /// Minimum height to show action button
-  /// The initial value of this property is height when expand view was initialized
+  /// Content view height when action button will be showed (collapsed state).
+  /// The initial value of this property is height when expand view was initialized.
   public var collapsedHeight: CGFloat!
   
-  /// Maximum heigth after expand action.
+  /// Content view heigth after expand. Useful for UIImageView.
   /// The initial value of this property is `nil`
-  public var fixedExpandedHeight: CGFloat!
+  public var expandedHeight: CGFloat!
   
-  /// Activate / deactivate gradient view.
-  /// The initial value of this property is `true`
-  public var gradientViewEnabled = true
+  //  MARK: Gradient
   
+  /// Show or hide gradient view.
+  /// The initial value of this property is `true`.
+  public var gradientEnabled = true
+  
+  /// Color for gradient view.
+  /// The initial value of this property is `UIColor.whiteColor()`. Starts from alpha 0 ends on alpha 1.
+  public var gradientColor: UIColor! {
+    didSet {
+      guard gradientView != nil else {
+        return
+      }
+      
+      let components = CGColorGetComponents(gradientColor.CGColor)
+      
+      var duplicateComponent: Bool = false
+      if CGColorGetNumberOfComponents(gradientColor.CGColor) == 2 {
+        duplicateComponent = true
+      }
+      
+      gradientView.startColor = UIColor(red: components[0], green: duplicateComponent ? components[0] : components[1], blue: duplicateComponent ? components[0] : components[2], alpha: 0.0)
+      gradientView.endColor = UIColor(red: components[0], green: duplicateComponent ? components[0] : components[1], blue: duplicateComponent ? components[0] : components[2], alpha: 1.0)
+      
+      gradientView.setNeedsDisplay()
+    }
+  }
+  
+  /// Aspect ratio of expand view (collapsed state) and gradient view heights.
+  /// The initial value of this property is `0.8`.
+  public var gradientHeightRatio: CGFloat! {
+    didSet {
+      guard collapsedHeight != nil else {
+        return
+      }
+      gradientViewHeightConstraint?.constant = collapsedHeight * gradientHeightRatio
+    }
+  }
+  
+  //  MARK: Titles
+
   /// Title for action button when expand view is collapsed.
-  /// The initial value of this property is `read more...`
+  /// The initial value of this property is `read more...`.
   public var moreTitle: String! {
     didSet {
       if !isExpanded {
@@ -145,7 +180,9 @@ public class AKExpandView: UIView {
     }
   }
   
-  /// Action button height,
+  //  MARK: Layout and spaces
+  
+  /// Height for action button.
   /// The initial value of this property is `50` px.
   public var actionBtnHeight: CGFloat = 50 {
     didSet {
@@ -153,7 +190,7 @@ public class AKExpandView: UIView {
     }
   }
   
-  /// Space between button and view to expand
+  /// Space between action button and content view.
   /// The initial value of this property is `16` px.
   public var spaceHeight: CGFloat = 16 {
     didSet {
@@ -161,23 +198,10 @@ public class AKExpandView: UIView {
     }
   }
   
-  /// Gradient color of gradient view
-  /// The initial value of this property is `UIColor.whiteColor()`
-  public var gradienColor: UIColor! {
-    didSet {
-      guard gradientView != nil else {
-        return
-      }
-
-      gradientView.startColor = gradienColor.colorWithAlphaComponent(0)
-      gradientView.endColor = gradienColor.colorWithAlphaComponent(1)
-      
-      gradientView.setNeedsDisplay()
-    }
-  }
+  //  MARK: Animation
   
-  /// Animates toggle on action
-  /// The initial value of this property is `false`
+  /// A Boolean value that determines whether animation is enabled.
+  /// The initial value of this property is `false`.
   public var enableAnimation = false
   
   /// Animation options
@@ -185,6 +209,17 @@ public class AKExpandView: UIView {
   /// - parameter duration: The total duration of the animations, measured in seconds. If you specify a negative value or 0, the changes are made without animating them.
   /// - parameter options: A mask of options indicating how you want to perform the animations. For a list of valid constants, see UIViewAnimationOptions.
   public var animationOptions = AKExpandViewAnimationOptions(duration: 0.3, option: .CurveEaseInOut)
+  
+  //  MARK: Flags
+  
+  /// Current state of expand view.
+  /// The initial value of this property is `false`. Resets after adding new subview.
+  private(set) var isExpanded: Bool = false
+  
+  //  MARK: Accessing the Delegate
+  
+  /// Delegate
+  weak var delegate: AKExpandViewDelegate?
   
   /// If we need change non-constraint property in animation block
   private var layoutBeforeAnimation: Bool = false
@@ -221,9 +256,16 @@ public class AKExpandView: UIView {
     createUI()
     
     // Setup UI
-    gradientView.hidden = true
+    clipsToBounds = true
+    expandWrapperView.clipsToBounds = true
+    expandWrapperView.backgroundColor = UIColor.clearColor()
+    expandWrapperView.bringSubviewToFront(gradientView)
+    expandContainerView.backgroundColor = UIColor.clearColor()
     gradientView.backgroundColor = UIColor.clearColor()
-    gradienColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+    gradientColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+    actionView.backgroundColor = UIColor.clearColor()
+    actionBtn.setTitleColor(UIColor.orangeColor(), forState: .Normal)
+    actionBtn.addTarget(self, action: #selector(toggleActionBtn), forControlEvents: UIControlEvents.TouchUpInside)
     moreTitle = "read more..."
     
     viewToExpand(view)
@@ -231,80 +273,249 @@ public class AKExpandView: UIView {
   
   private func createUI() {
     
-     clipsToBounds = true
-    
-    
     expandWrapperView = UIView()
-    expandWrapperView.backgroundColor = UIColor.clearColor()
-    expandWrapperView.clipsToBounds = true
     expandWrapperView.translatesAutoresizingMaskIntoConstraints = false
     addSubview(expandWrapperView)
     
-    expandWrapperView.topAnchor.constraintEqualToAnchor(topAnchor).active = true
-    expandWrapperView.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
-    expandWrapperView.trailingAnchor.constraintEqualToAnchor(trailingAnchor).active = true
-    
-    expandWrapperViewHeightConstraint = expandWrapperView.heightAnchor.constraintEqualToConstant(0.0)
-    expandWrapperViewHeightConstraint.active = true
-    
+    if #available(iOS 9.0, *) {
+      expandWrapperView.topAnchor.constraintEqualToAnchor(topAnchor).active = true
+      expandWrapperView.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
+      expandWrapperView.trailingAnchor.constraintEqualToAnchor(trailingAnchor).active = true
+      
+      expandWrapperViewHeightConstraint = expandWrapperView.heightAnchor.constraintEqualToConstant(0.0)
+      expandWrapperViewHeightConstraint.active = true
+ 
+    } else {
+      let viewsDictionary = ["expandWrapperView": expandWrapperView]
+      
+      addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+        "V:|-0-[expandWrapperView]",
+        options: NSLayoutFormatOptions(rawValue: 0),
+        metrics: nil,
+        views: viewsDictionary))
+      
+      addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+        "H:|-0-[expandWrapperView]-0-|",
+        options: NSLayoutFormatOptions(rawValue: 0),
+        metrics: nil,
+        views:
+        viewsDictionary))
+      
+      expandWrapperViewHeightConstraint = NSLayoutConstraint(
+        item: expandWrapperView,
+        attribute: .Height,
+        relatedBy: .Equal,
+        toItem: nil,
+        attribute: .NotAnAttribute,
+        multiplier: 1,
+        constant: 0
+      )
+      
+      expandWrapperView.addConstraint(expandWrapperViewHeightConstraint)
+    }
+  
     actionView = UIView()
-    actionView.backgroundColor = UIColor.clearColor()
     actionView.translatesAutoresizingMaskIntoConstraints = false
     addSubview(actionView)
     
-    actionView.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
-    actionView.trailingAnchor.constraintEqualToAnchor(trailingAnchor).active = true
-    expandWrapperView.bottomAnchor.constraintEqualToAnchor(actionView.topAnchor).active = true
+    if #available(iOS 9.0, *) {
+      actionView.leadingAnchor.constraintEqualToAnchor(leadingAnchor).active = true
+      actionView.trailingAnchor.constraintEqualToAnchor(trailingAnchor).active = true
+      expandWrapperView.bottomAnchor.constraintEqualToAnchor(actionView.topAnchor).active = true
+    } else {
+      let viewsDictionary = ["actionView": actionView, "expandWrapperView": expandWrapperView ]
+      addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+        "H:|-0-[actionView]-0-|",
+        options: NSLayoutFormatOptions(rawValue: 0),
+        metrics: nil,
+        views:
+        viewsDictionary))
+      addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+        "V:[expandWrapperView]-[actionView]",
+        options: NSLayoutFormatOptions(rawValue: 0),
+        metrics: nil,
+        views: viewsDictionary))
+    }
     
     actionBtn = UIButton()
-    actionBtn.setTitleColor(UIColor.orangeColor(), forState: .Normal)
-    actionBtn.addTarget(self, action: #selector(toggleActionBtn), forControlEvents: UIControlEvents.TouchUpInside)
     actionBtn.translatesAutoresizingMaskIntoConstraints = false
     actionView.addSubview(actionBtn)
     
-    let l = actionBtn.leadingAnchor.constraintLessThanOrEqualToAnchor(actionView.leadingAnchor)
-    l.active = true
-    l.priority = 250
-    
-   let t =  actionBtn.trailingAnchor.constraintLessThanOrEqualToAnchor(actionView.trailingAnchor)
-    t.active = true
-    t.priority = 250
-    
-    actionBtn.centerXAnchor.constraintEqualToAnchor(actionView.centerXAnchor).active = true
-    
-    actionViewVericalSpaceConstraint = actionBtn.topAnchor.constraintEqualToAnchor(actionView.topAnchor, constant: spaceHeight)
+    if #available(iOS 9.0, *) {
+      let l = actionBtn.leadingAnchor.constraintLessThanOrEqualToAnchor(actionView.leadingAnchor)
+      l.active = true
+      l.priority = 250
       
-    actionViewVericalSpaceConstraint.active = true
+     let t =  actionBtn.trailingAnchor.constraintLessThanOrEqualToAnchor(actionView.trailingAnchor)
+      t.active = true
+      t.priority = 250
+
+      actionBtn.centerXAnchor.constraintEqualToAnchor(actionView.centerXAnchor).active = true
+      
+      actionViewVericalSpaceConstraint = actionBtn.topAnchor.constraintEqualToAnchor(actionView.topAnchor, constant: spaceHeight)        
+      actionViewVericalSpaceConstraint.active = true
+      
+      actionBtnHeightConstraint = actionBtn.heightAnchor.constraintEqualToConstant(actionBtnHeight)
+      actionBtnHeightConstraint.active = true
+      
+      actionBtn.bottomAnchor.constraintEqualToAnchor(actionView.bottomAnchor).active = true
+    } else {
+      let l = NSLayoutConstraint(
+        item: actionBtn,
+        attribute: .Leading,
+        relatedBy: .Equal,
+        toItem: actionView,
+        attribute: .Leading,
+        multiplier: 1,
+        constant: 0
+      )
+      l.priority = 250
+      
+      let t = NSLayoutConstraint(
+        item: actionBtn,
+        attribute: .Trailing,
+        relatedBy: .Equal,
+        toItem: actionView,
+        attribute: .Trailing,
+        multiplier: 1,
+        constant: 0
+      )
+      t.priority = 250
+      
+      let c = NSLayoutConstraint(
+        item: actionBtn,
+        attribute: .CenterX,
+        relatedBy: .Equal,
+        toItem: actionView,
+        attribute: .CenterX,
+        multiplier: 1,
+        constant: 0
+      )
+      
+      actionViewVericalSpaceConstraint = NSLayoutConstraint(
+        item: actionBtn,
+        attribute: .Top,
+        relatedBy: .Equal,
+        toItem: actionView,
+        attribute: .Top,
+        multiplier: 1,
+        constant: spaceHeight
+      )
+      
+      actionBtnHeightConstraint = NSLayoutConstraint(
+        item: actionBtn,
+        attribute: .Height,
+        relatedBy: .Equal,
+        toItem: nil,
+        attribute: .NotAnAttribute,
+        multiplier: 1,
+        constant: actionBtnHeight
+      )
+      
+      actionBtn.addConstraint(actionBtnHeightConstraint)
+      
+      let b = NSLayoutConstraint(
+        item: actionBtn,
+        attribute: .Bottom,
+        relatedBy: .Equal,
+        toItem: actionView,
+        attribute: .Bottom,
+        multiplier: 1,
+        constant: 0
+      )
+      
+      actionView.addConstraints([l, t, c, actionViewVericalSpaceConstraint, b])
+    }
     
-    actionBtnHeightConstraint = actionBtn.heightAnchor.constraintEqualToConstant(actionBtnHeight)
-    actionBtnHeightConstraint.active = true
-    
-    actionBtn.bottomAnchor.constraintEqualToAnchor(actionView.bottomAnchor).active = true
- 
     expandContainerView = UIView()
-    expandContainerView.backgroundColor = UIColor.clearColor()
     expandContainerView.translatesAutoresizingMaskIntoConstraints = false
     expandWrapperView.addSubview(expandContainerView)
     
-    expandContainerView.topAnchor.constraintEqualToAnchor(expandWrapperView.topAnchor).active = true
-    expandContainerView.leadingAnchor.constraintEqualToAnchor(expandWrapperView.leadingAnchor).active = true
-    expandContainerView.trailingAnchor.constraintEqualToAnchor(expandWrapperView.trailingAnchor).active = true
-    
-    expandContainerViewHeightConstraint = expandContainerView.heightAnchor.constraintEqualToConstant(0.0)
-    expandContainerViewHeightConstraint!.active = true
+    if #available(iOS 9.0, *) {
+      expandContainerView.topAnchor.constraintEqualToAnchor(expandWrapperView.topAnchor).active = true
+      expandContainerView.leadingAnchor.constraintEqualToAnchor(expandWrapperView.leadingAnchor).active = true
+      expandContainerView.trailingAnchor.constraintEqualToAnchor(expandWrapperView.trailingAnchor).active = true
+      
+      expandContainerViewHeightConstraint = expandContainerView.heightAnchor.constraintEqualToConstant(0.0)
+      expandContainerViewHeightConstraint!.active = true
+    } else {
+      let viewsDictionary = ["expandContainerView": expandContainerView]
+      
+      expandWrapperView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+        "V:|-0-[expandContainerView]",
+        options: NSLayoutFormatOptions(rawValue: 0),
+        metrics: nil,
+        views: viewsDictionary))
+      
+      expandWrapperView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+        "H:|-0-[expandContainerView]-0-|",
+        options: NSLayoutFormatOptions(rawValue: 0),
+        metrics: nil,
+        views:
+        viewsDictionary))
+      
+      expandContainerViewHeightConstraint = NSLayoutConstraint(
+        item: expandContainerView,
+        attribute: .Height,
+        relatedBy: .Equal,
+        toItem: nil,
+        attribute: .NotAnAttribute,
+        multiplier: 1,
+        constant: 0
+      )
+      
+      expandContainerView.addConstraint(expandContainerViewHeightConstraint!)
+    }
     
     gradientView = AKExpandGradientView()
     gradientView.translatesAutoresizingMaskIntoConstraints = false
     expandWrapperView.addSubview(gradientView)
     
-    gradientView.leadingAnchor.constraintEqualToAnchor(expandWrapperView.leadingAnchor).active = true
-    gradientView.trailingAnchor.constraintEqualToAnchor(expandWrapperView.trailingAnchor).active = true
+    if #available(iOS 9.0, *) {
+      gradientView.leadingAnchor.constraintEqualToAnchor(expandWrapperView.leadingAnchor).active = true
+      gradientView.trailingAnchor.constraintEqualToAnchor(expandWrapperView.trailingAnchor).active = true
     
-    gradientView_superView_bottomConstraint = gradientView.bottomAnchor.constraintEqualToAnchor(expandWrapperView.bottomAnchor, constant: 0.0)
-    gradientView_superView_bottomConstraint.active = true
-    
-    gradientViewHeightConstraint = gradientView.heightAnchor.constraintEqualToConstant(80.0)
-    gradientViewHeightConstraint.active = true
+      gradientView_superView_bottomConstraint = gradientView.bottomAnchor.constraintEqualToAnchor(expandWrapperView.bottomAnchor, constant: 0.0)
+      gradientView_superView_bottomConstraint.active = true
+      
+      gradientViewHeightConstraint = gradientView.heightAnchor.constraintEqualToConstant(0.0)
+      
+      gradientHeightRatio = 0.8
+      gradientViewHeightConstraint.active = true
+    } else {
+      let viewsDictionary = ["gradientView": gradientView]
+      expandWrapperView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+        "H:|-0-[gradientView]-0-|",
+        options: NSLayoutFormatOptions(rawValue: 0),
+        metrics: nil,
+        views:
+        viewsDictionary))
+      
+      gradientViewHeightConstraint = NSLayoutConstraint(
+        item: gradientView,
+        attribute: .Height,
+        relatedBy: .Equal,
+        toItem: nil,
+        attribute: .NotAnAttribute,
+        multiplier: 1,
+        constant: 0.0
+      )
+      gradientHeightRatio = 0.8
+      
+      gradientView.addConstraint(gradientViewHeightConstraint)
+      
+      gradientView_superView_bottomConstraint = NSLayoutConstraint(
+        item: expandWrapperView,
+        attribute: .Bottom,
+        relatedBy: .Equal,
+        toItem: gradientView,
+        attribute: .Bottom,
+        multiplier: 1,
+        constant: 0
+      )
+      
+      expandWrapperView.addConstraint(gradientView_superView_bottomConstraint)
+    }
   }
   
   
@@ -336,61 +547,65 @@ public class AKExpandView: UIView {
     
     expandContainerView.addSubview(viewToExpand)
     
-    viewToExpand.topAnchor.constraintEqualToAnchor(expandContainerView.topAnchor).active = true
-    viewToExpand.bottomAnchor.constraintEqualToAnchor(expandContainerView.bottomAnchor).active = true
-    viewToExpand.leadingAnchor.constraintEqualToAnchor(expandContainerView.leadingAnchor).active = true
-    viewToExpand.trailingAnchor.constraintEqualToAnchor(expandContainerView.trailingAnchor).active = true
-    
+    if #available(iOS 9.0, *) {
+      viewToExpand.topAnchor.constraintEqualToAnchor(expandContainerView.topAnchor).active = true
+      viewToExpand.bottomAnchor.constraintEqualToAnchor(expandContainerView.bottomAnchor).active = true
+      viewToExpand.leadingAnchor.constraintEqualToAnchor(expandContainerView.leadingAnchor).active = true
+      viewToExpand.trailingAnchor.constraintEqualToAnchor(expandContainerView.trailingAnchor).active = true                      
+    } else {
+      let viewsDictionary = ["viewToExpand": viewToExpand]
+      expandContainerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+      "H:|-0-[viewToExpand]-0-|",
+      options: NSLayoutFormatOptions(rawValue: 0),
+      metrics: nil,
+      views:
+      viewsDictionary))
+      
+      expandContainerView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(
+      "V:|-0-[viewToExpand]-0-|",
+      options: NSLayoutFormatOptions(rawValue: 0),
+      metrics: nil,
+      views: viewsDictionary))
+    }
     if expandViewHeightContraint != nil {
       expandContainerViewHeightConstraint?.constant = expandViewHeightContraint!.constant
     }
   }
   
   override public func layoutSubviews() {
-    super.layoutSubviews()
+    super.layoutIfNeeded()
     
     var height = collapsedHeight
     
     if let expandView = expandView {
       
       if !layoutBeforeAnimation {
-//        expandView.layoutIfNeeded()
-//        expandView.layoutSubviews()
         expandView.sizeToFit()
       }
       height = CGRectGetHeight(expandView.frame)
     }
-    
-    
-    
+
     height = height <= 0 ? collapsedHeight : height
-    
-    print("  ")
-    print("height \(height)")
-    
     
     if expandViewHeightContraint != nil {
       height = expandViewHeightContraint!.constant
     }
-    
-    
     
     expandContainerView.frame.size.height = height
     expandContainerViewHeightConstraint?.constant = height
     
     if expandViewHeightContraint != nil {
     } else {
-      print(" SS ")
       expandView.frame.size.height = height
-      print(" WILL LAYOUT WEB VIEW")
-      expandView.layoutSubviews()
-      
     }
-    
     
     var heightWithActionView = height
     
-    gradientView_superView_bottomConstraint.constant = isExpanded || (!isExpanded && height <= collapsedHeight) ? gradientView.frame.size.height : 0
+    var sign: CGFloat = -1.0
+    if #available(iOS 9.0, *) {
+      sign = 1.0
+    }
+    gradientView_superView_bottomConstraint.constant = isExpanded || (!isExpanded && height <= collapsedHeight) ? gradientView.frame.size.height * sign : 0
     
     if height > collapsedHeight {
       height = isExpanded ? height : collapsedHeight
@@ -404,19 +619,22 @@ public class AKExpandView: UIView {
     heightConstraint?.constant = heightWithActionView
     expandWrapperViewHeightConstraint.constant = height
     
-//        expandView.layoutSubviews()
+    super.layoutSubviews()
     
-   /* print(" - ")
-    print(" ")
-    print(" ")
-    
-    print("\(expandView)")
-    
-    print("\((expandView as! AKActivityWebView).webView)")
-    print("\((expandView as! AKActivityWebView).webView.scrollView)")
-    print("\((expandView as! AKActivityWebView).webView.scrollView.contentSize)")*/
-    
-    
+    #if AKExpandViewDEBUG
+      print("\(self.dynamicType) \(#function)")
+      print("AKExpandView: \(self.frame)")
+      print("expandWrapperView: \(expandWrapperView.frame)")
+      print("expandWrapperViewHeightConstraint: \(expandWrapperViewHeightConstraint.constant)")
+      print("      expandContainerView: \(expandContainerView.frame)")
+      print("      expandContainerViewHeightConstraint: \(expandContainerViewHeightConstraint?.constant)")
+      print("            expandView: \(expandView.frame)")
+      print("            expandViewHeightContraint: \(expandViewHeightContraint?.constant)")
+      print("      gradientView: \(gradientView.frame)")
+      print("      gradientView_superView_bottomConstraint: \(gradientView_superView_bottomConstraint.constant)")
+      print("actionView: \(actionView.frame)")
+      print("")
+    #endif
   }
   
   private func _layoutSubviews(animated: Bool! = nil) {
@@ -518,12 +736,3 @@ public class AKExpandView: UIView {
     return nil
   }
 }
-
-//  MARK: - AKExpandViewDelegate
-
-/*extension AKExpandViewDelegate {
-  func expandView(expandView: AKExpandView, willExpandView viewToExpand: UIView) {}
-  func expandView(expandView: AKExpandView, didExpandView viewToExpand: UIView) {}
-  func expandView(expandView: AKExpandView, willCollapseView viewToExpand: UIView) {}
-  func expandView(expandView: AKExpandView, didCollapseView viewToExpand: UIView) {}
-}*/
