@@ -1,0 +1,3 @@
+[submodule "Vendor/AKActivityWebView"]
+	path = Vendor/AKActivityWebView
+	url = https://github.com/artemkrachulov/AKActivityWebView.git
