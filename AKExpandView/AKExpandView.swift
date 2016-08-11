@@ -516,8 +516,7 @@ public class AKExpandView: UIView {
       
       expandWrapperView.addConstraint(gradientView_superView_bottomConstraint)
     }
-  }
-  
+  }  
   
   public func viewToExpand(view: UIView?) {
     guard let viewToExpand = view else {
